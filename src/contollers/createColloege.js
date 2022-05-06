@@ -11,7 +11,7 @@ const createcollege = async (req, res) => {
         if (!(validator.isURL(logoLink))) return res.status(400).send({ status: false, message: 'please enter valid link for logo' })
         const nameexist = await collegeModel.find({ name: name })
         console.log(nameexist)
-        if (nameexist) return res.status(400).send({ status: false, msg: 'college is already exists in data base' })
+        if (nameexist.length!=0) return res.status(400).send({ status: false, msg: 'college is already exists in data base' })
         const college = await collegeModel.create(data)
         res.status(201).send({ Status: true, college })
     }
