@@ -1,10 +1,9 @@
-const { builtinModules } = require('module')
 const collegeModel = require('../models/collegeModel')
 const internModel = require('../models/studentModel')
 const getdata = async (req, res) => {
     try {
         const data = req.query.collegeName
-        if (!data) return res.status.send({ status: false, message: 'please enter the college name' })
+        if (!data) return res.status(400).send({ status: false, message: 'please enter the college name' })
         if (!(typeof (data) !== String)) return res.status(400).send({ status: false, message: 'please provid valid college name' })
 
         const collegeDetails = await collegeModel.find({ name: data })
@@ -20,5 +19,5 @@ const getdata = async (req, res) => {
 
     }
 }
-module.exports.getdata = getdata
+module.exports.getdata=getdata
 

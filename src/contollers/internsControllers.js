@@ -7,6 +7,7 @@ const studentCreate = async (req, res) => {
 
 
     const { name, mobile, email, collegeName } = data
+    if(!mobile)return res.status(400).send({status:false,message:'please enter the number '})
     let number = mobile.toString()
 
     if (!(email)) return res.status(404).send({ status: false, message: 'please enter the email' })
@@ -30,7 +31,7 @@ const studentCreate = async (req, res) => {
     console.log(college)
     const student = await studnetModel.create(finaldetails)
     
-    res.send(student)
+    res.status(201).send({status:true,message:student})
   }
   catch (e) {
     res.status(500).send({ Status: false, error: e.message})
