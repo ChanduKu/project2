@@ -10,7 +10,7 @@ const getdata = async (req, res) => {
         if (!collegeDetails) return res.status(400).send({ status: false, message: 'college is not present in the data base' })
 
         const student = await internModel.find({ collegeId: collegeDetails[0]._id })
-        res.send({ status: true, collegeDetails, interests: student })
+        res.status(400).send({ status: true, collegeDetails, interests: student })
 
 
     }
