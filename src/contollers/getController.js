@@ -13,7 +13,6 @@ const getdata = async (req, res) => {
         const student = await internModel.find({ collegeId: collegeDetails[0]._id })
         res.status(400).send({ status: true, collegeDetails, interests: student })
 
-
     }
     catch (e) {
         res.send(e.message)
