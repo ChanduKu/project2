@@ -7,14 +7,15 @@ const studentCreate = async (req, res) => {
 
 
     const { name, mobile, email, collegeName } = data
+    if(!name) return res.status(400).send({status:false,message:'please enter the name '})
     if(!mobile)return res.status(400).send({status:false,message:'please enter the number '})
     let number = mobile.toString()
     if (!(email)) return res.status(404).send({ status: false, message: 'please enter the email' })
     if (!(validators.isEmail(email))) return res.status(400).send({ status: false, msg: 'plese enter valid email id' })
     let emailex = await studnetModel.findOne({ email: email })
     if (emailex!=null) return res.status(400).send({ status: false, message: 'email already registerd' })
-    if (!mobile) return res.status(400).send({ status: false, mesggage: 'please enter the mobile number ' })
-    if((number.leght)!=10)return res.status(400).send({status:false,message:'moblie number must be 10 digits '})
+    //console.log(number.length)
+    if((number.length)!=10)return res.status(400).send({status:false,message:'moblie number must be 10 digits '})
     if (!(validators.isMobilePhone(number))) return res.status(400).send({ status: false, message: 'please enter the valid mobile number' })
     let mobileex = await studnetModel.findOne({ mobile:  number})
    
