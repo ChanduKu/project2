@@ -14,9 +14,10 @@ const studentCreate = async (req, res) => {
     let emailex = await studnetModel.findOne({ email: email })
     if (emailex!=null) return res.status(400).send({ status: false, message: 'email already registerd' })
     if (!mobile) return res.status(400).send({ status: false, mesggage: 'please enter the mobile number ' })
+    if((number.leght)!=10)return res.status(400).send({status:false,message:'moblie number must be 10 digits '})
     if (!(validators.isMobilePhone(number))) return res.status(400).send({ status: false, message: 'please enter the valid mobile number' })
     let mobileex = await studnetModel.findOne({ mobile:  number})
-    console.log(mobileex)
+   
     if (mobileex) return res.status(400).send({ status: false, message: 'mobile number is already exists' })
     if (!collegeName) return res.status(400).send({ status: false, message: 'please enter the college name' })
   
