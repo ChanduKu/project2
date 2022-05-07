@@ -11,18 +11,16 @@ const studentCreate = async (req, res) => {
     let number = mobile.toString()
 
     if (!(email)) return res.status(404).send({ status: false, message: 'please enter the email' })
-    console.log(email)
     if (!(validators.isEmail(email))) return res.status(400).send({ status: false, msg: 'plese enter valid email id' })
     let emailex = await studnetModel.findOne({ email: email })
-    console.log(emailex)
-    console.log(emailex)
     if (emailex!=null) return res.status(400).send({ status: false, message: 'email already registerd' })
     if (!mobile) return res.status(400).send({ status: false, mesggage: 'please enter the mobile number ' })
     if (!(validators.isMobilePhone(number))) return res.status(400).send({ status: false, message: 'please enter the valid mobile number' })
-    let mobileex = await collegeModel.findOne({ mobile: mobile })
-    if (!mobileex) return res.status(400).send({ status: false, message: 'mobile number is already exists' })
+    let mobileex = await studnetModel.findOne({ mobile:  number})
+    console.log(mobileex)
+    if (mobileex) return res.status(400).send({ status: false, message: 'mobile number is already exists' })
     if (!collegeName) return res.status(400).send({ status: false, message: 'please enter the college name' })
-    console.log(typeof(collegeName))
+  
     if (!(typeof (collegeName) == "string")) return res.status(400).send({ status: false, message: 'please enter the valid college name' })
 
     const college = await collegeModel.findOne({ name: collegeName }, { _id: 1 })
